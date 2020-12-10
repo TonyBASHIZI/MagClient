@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-// import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 // import 'package:magTechClient/CustomAppBar.dart';
 import 'package:MagClient/CustomShapeClipper.dart';
 import 'package:MagClient/main.dart';
@@ -26,7 +26,7 @@ class relaisList extends StatelessWidget {
     var response = await http.get(url);
     return jsonDecode(response.body);
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,14 +70,15 @@ class relaisList extends StatelessWidget {
                           ),
                           child: Column(
                             children: <Widget>[
-                              Image.asset("assets/images/carwash.jpg"),
+                              Image.asset(
+                                  "assets/images/${list[index]['photo']}"),
                               Container(
                                 padding: EdgeInsets.all(5),
                                 child: Text(
                                   list[index]['designation'],
                                   style: TextStyle(
                                     color: Colors.green,
-                                    fontSize: 25,
+                                    fontSize: 20,
                                   ),
                                 ),
                               ),
@@ -96,8 +97,11 @@ class relaisList extends StatelessWidget {
                                 child: Stack(
                                   children: <Widget>[
                                     Text(list[index]['description']),
-                                    FlatButton(
-                                        onPressed: () {}, child: Text("Like")),
+                                    // Container(
+                                    //   margin: EdgeInsets.all(15),
+                                    //   child: FlatButton(
+                                    //       onPressed: () {}, child: Text("Like")),
+                                    // ),
                                   ],
                                 ),
                               )
@@ -310,9 +314,5 @@ class FlightDetailChip extends StatelessWidget {
   }
 }
 
-// onNotificationInLowerVersions(ReceivedNotification receivedNotification) {}
-// onNotificationClick(String payload) {
-
-// }
-
-
+onNotificationInLowerVersions(ReceivedNotification receivedNotification) {}
+onNotificationClick(String payload) {}

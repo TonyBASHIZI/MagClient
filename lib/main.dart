@@ -190,10 +190,6 @@ class _HomeScreenTopPartState extends State<HomeScreenTopPart> {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-                    ChoiceChip(Icons.business, "Station and Business"),
-                    SizedBox(
-                      width: 30.0,
-                    ),
                     InkWell(
                       onTap: () {
                         Navigator.push(
@@ -201,8 +197,12 @@ class _HomeScreenTopPartState extends State<HomeScreenTopPart> {
                             MaterialPageRoute(
                                 builder: (context) => expedier()));
                       },
-                      child: ChoiceChip(Icons.send, "Transfert"),
+                      child: ChoiceChip(Icons.account_balance, "Balance"),
                     ),
+                    SizedBox(
+                      width: 30.0,
+                    ),
+                    ChoiceChip(Icons.business, "Station and Business"),
                   ],
                 )
               ],

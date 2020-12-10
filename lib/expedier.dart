@@ -8,10 +8,10 @@ class expedier extends StatelessWidget {
   Widget build(BuildContext context) {
      return Scaffold(
       appBar: AppBar( 
-        backgroundColor: Color.fromRGBO(253, 205, 107, 1),
+        backgroundColor: Colors.green,
         
         title: Text(
-          "Expedier",
+          "Balance carte",
          
         ),
         elevation: 0.0,
@@ -42,6 +42,7 @@ class expedier extends StatelessWidget {
 class FlightListTopPart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    
     return Stack(
       children: <Widget>[
         ClipPath(
@@ -73,13 +74,13 @@ class FlightListTopPart extends StatelessWidget {
                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                          crossAxisAlignment: CrossAxisAlignment.start,
                          children: <Widget>[
-                           Text("Estimer prix",
+                           Text("Balance compte MagTech",
                        style: TextStyle(
                          fontSize: 16.0,
                        ),
                        ),
                        Divider(color: Colors.grey,height: 20.0,),
-                       Text("de l'expedition", 
+                       Text("Gagnez de l'argent en utilisant nos services", 
                        style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
                        ),
                          ],
@@ -103,37 +104,150 @@ class FlightListTopPart extends StatelessWidget {
 class formExpedier extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+     bool isSaving = false;
+  dialog() => showDialog(
+    context: context,
+        builder: (BuildContext context) {
+          // return object of type Dialog
+          return AlertDialog(
+            title: Container(
+              
+                height: 120,
+                padding: EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                        offset: Offset(0, 0),
+                        color: Colors.black45,
+                        blurRadius: 3)
+                  ],
+                  borderRadius: BorderRadius.circular(5),
+                  color: Colors.green,
+                ),
+                child: new Text(
+                  "Matricule Magxxxxxxxxx solde du compte est de \n 00 fc",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.white),
+                )),
+            actions: <Widget>[
+              isSaving == false
+                  ? Container(
+                      width: 120,
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(5),
+                        boxShadow: [
+                          BoxShadow(
+                              offset: Offset(0, 0),
+                              color: Colors.black45,
+                              blurRadius: 2)
+                        ],
+                      ),
+                      child: new FlatButton(
+                        child: new Text(
+                          "Fermer",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    )
+                  : CircularProgressIndicator(),
+              
+            ],
+          );
+        },
+      );
     return Container(
       margin :EdgeInsets.symmetric(horizontal: 24.0),
       child: Column(
       
         children: <Widget>[
         
-          TextField(       
-              controller: TextEditingController(
-                  text: "Pays",
-                     
-              ),
-               style: dropDownMenuItemStyle,
-               cursorColor: appTheme.primaryColor,
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              boxShadow: [BoxShadow(offset: Offset(0, 0), color: Colors.black45, blurRadius: 3)],
+              color: Colors.white,
+            ),
+            child: TextField( 
+                  
+                controller: TextEditingController(
+                    text: "",
+                       
+                ),
+                 style: dropDownMenuItemStyle,
+                 obscureText: false,
+                 textAlign: TextAlign.center,
+                 decoration: InputDecoration(
+                        contentPadding: EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 14.0),
+                        suffixIcon: Material(
+                          elevation: 2.0,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(30.0),
+                          ),
+                          child: InkWell(
+                            onTap: () {
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) =>
+                              //             FlightListingScreen())
+                              //             );
+                            },
+                            child: Icon(
+                              Icons.credit_card,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                        border: InputBorder.none,
+                      ),
+            ),
           ),
-          TextField(       
-              controller: TextEditingController(
-                  text: "Ville",
-                     
-              ),
+          SizedBox(height: 25,),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              boxShadow: [BoxShadow(offset: Offset(0, 0),color: Colors.black45,blurRadius: 3)],
+              color: Colors.white
+            ),
+            child: TextField(       
+                controller: TextEditingController(
+                    text: "",
+                       
+                ),
+                
+                 style: dropDownMenuItemStyle,
+                 cursorColor: appTheme.primaryColor,
+                 keyboardType: TextInputType.text,
+                 obscureText: true,
+                 textAlign: TextAlign.center,
+                 
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(0, 55, 0, 0),
+            width: 500,
+            decoration: BoxDecoration(
               
-               style: dropDownMenuItemStyle,
-               cursorColor: appTheme.primaryColor,
-          ),
-          TextField(       
-              controller: TextEditingController(
-                  text: "Categorie coli",
-                     
-              ),
-               style: dropDownMenuItemStyle,
-               cursorColor: appTheme.primaryColor,
-          ),
+              borderRadius: BorderRadius.circular(5),
+              boxShadow: [BoxShadow(offset: Offset(0, 0),color: Colors.black45,blurRadius: 3)],
+              color: Colors.green
+            ),
+            child: FlatButton(onPressed: () {
+          dialog();
+        }, 
+            child: Text("Valider",
+            style: TextStyle(color: Colors.white)
+            ),
+            
+            ),
+          )
         ],
       ),
     );
