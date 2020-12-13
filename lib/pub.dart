@@ -12,7 +12,7 @@ class Pub extends StatefulWidget {
   }
 }
 
-// class PubState extends State<Pub> {
+// class _PubState extends State<Pub> {
 //   List<Pub> _pubs;
 //   GlobalKey<ScaffoldState> _scaffoldKey;
 //   TextEditingController _titre;

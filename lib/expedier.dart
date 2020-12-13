@@ -174,7 +174,7 @@ class formExpedier extends StatelessWidget {
               color: Colors.white,
             ),
             child: TextField( 
-                  
+                
                 controller: TextEditingController(
                     text: "",
                        
@@ -183,6 +183,7 @@ class formExpedier extends StatelessWidget {
                  obscureText: false,
                  textAlign: TextAlign.center,
                  decoration: InputDecoration(
+                   labelText: "Matricule du compte",
                         contentPadding: EdgeInsets.symmetric(
                             horizontal: 16.0, vertical: 14.0),
                         suffixIcon: Material(
@@ -216,7 +217,13 @@ class formExpedier extends StatelessWidget {
               boxShadow: [BoxShadow(offset: Offset(0, 0),color: Colors.black45,blurRadius: 3)],
               color: Colors.white
             ),
-            child: TextField(       
+            
+            child: TextField(  
+              decoration: InputDecoration(
+                labelText: "Password",
+                contentPadding: EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 14.0)
+              ),     
                 controller: TextEditingController(
                     text: "",
                        
@@ -242,8 +249,8 @@ class formExpedier extends StatelessWidget {
             child: FlatButton(onPressed: () {
           dialog();
         }, 
-            child: Text("Valider",
-            style: TextStyle(color: Colors.white)
+            child: Text("Soumettre",
+            style: TextStyle(color: Colors.white, fontSize: 20)
             ),
             
             ),
