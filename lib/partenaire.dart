@@ -13,7 +13,8 @@ final Color discountBackgroungColor = Color(0xFFFF0000);
 final Color flishBorderColor = Color(0xFFEF772C);
 final Color chipBackgroundColor = Color(0xFFF6F6F6);
 
-class relaisList extends StatelessWidget {
+
+class partenaire extends StatelessWidget {
   Future getData() async {
     var url = BaseUrl.ip;
     var response = await http.get(url);
@@ -29,6 +30,7 @@ class relaisList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final orientation = MediaQuery.of(context).orientation;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
@@ -47,17 +49,23 @@ class relaisList extends StatelessWidget {
         ),
       ),
       body: FutureBuilder(
+          
           future: getData(),
           builder: (context, snapshot) {
             if (snapshot.hasError) print(snapshot.error);
             return snapshot.hasData
                 ? ListView.builder(
+                    // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    //  crossAxisCount: (orientation == Orientation.portrait) ? 2 : 3),
+                    // scrollDirection: Axis.vertical,
+                    
                     itemCount: snapshot.data.length,
                     itemBuilder: (context, index) {
                       List list = snapshot.data;
                       return ListTile(
                         title: Container(
                           padding: EdgeInsets.all(15),
+                          margin: EdgeInsets.all(5),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
                             boxShadow: [
@@ -70,17 +78,22 @@ class relaisList extends StatelessWidget {
                           ),
                           child: Column(
                             children: <Widget>[
+                              Container(
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  boxShadow: [BoxShadow(offset: Offset(0,0),color: Colors.black45,blurRadius: 4)],
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: Colors.green,
+                                ),
+                                
+                                child: Text(list[index]["designation"],
+                                style: TextStyle(color: Colors.white),
+                                )
+                                ),
                               Image.asset(
                                   "assets/images/${list[index]['photo']}"),
                               Container(
-                                padding: EdgeInsets.all(5),
-                                child: Text(
-                                  list[index]['designation'],
-                                  style: TextStyle(
-                                    color: Colors.green,
-                                    fontSize: 20,
-                                  ),
-                                ),
+                                padding: EdgeInsets.all(10),  
                               ),
                               Container(
                                 padding: EdgeInsets.all(10),
@@ -96,7 +109,8 @@ class relaisList extends StatelessWidget {
                                 ),
                                 child: Stack(
                                   children: <Widget>[
-                                    Text(list[index]['description']),
+                                    Padding(padding: EdgeInsets.all(20)),
+                                    Text(list[index]['description'],textAlign: TextAlign.center,),
                                     // Container(
                                     //   margin: EdgeInsets.all(15),
                                     //   child: FlatButton(

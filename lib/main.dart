@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:MagClient/CustomAppBar.dart';
 import 'package:MagClient/CustomShapeClipper.dart';
 import 'package:MagClient/NotificationPlugin.dart';
-import 'package:MagClient/expedier.dart';
+import 'package:MagClient/balance.dart';
 import 'package:MagClient/flight_list.dart';
-import 'package:MagClient/relais_list.dart';
+import 'package:MagClient/partenaire.dart';
 
 void main() => runApp(MaterialApp(
       title: 'Tracking bagages',
@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: CustomAppBar(),
+      bottomNavigationBar: CustomAppBar(context),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
@@ -195,7 +195,7 @@ class _HomeScreenTopPartState extends State<HomeScreenTopPart> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => expedier()));
+                                builder: (context) => balance()));
                       },
                       child: ChoiceChip(Icons.account_balance, "Balance"),
                     ),
@@ -312,7 +312,7 @@ class CityCard extends StatelessWidget {
             child: InkWell(
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => relaisList()));
+                    MaterialPageRoute(builder: (context) => partenaire()));
               },
               child: Stack(
                 children: <Widget>[
