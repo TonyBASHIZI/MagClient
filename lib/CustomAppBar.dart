@@ -1,6 +1,7 @@
+import 'package:MagClient/balance.dart';
 import 'package:flutter/material.dart';
 import 'package:MagClient/partenaire.dart';
-import 'flight_list.dart';
+import 'services.dart';
 import 'main.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -29,12 +30,19 @@ class CustomAppBar extends StatelessWidget {
     );
     bottomBarItems.add(
       BottomNavigationBarItem(
-        icon: Icon(
-          Icons.notification_important,
-          color: Colors.black,
-        ),
+         icon: Material(
+            child: InkWell(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => services()));
+                },
+                child: Icon(
+                  Icons.local_laundry_service,
+                  color: Colors.black,
+                )),
+          ),
         title: Text(
-          "Notification",
+          "Services",
           style: bottomNavigationBarItemStyle,
         ),
       ),
@@ -59,14 +67,21 @@ class CustomAppBar extends StatelessWidget {
     );
     bottomBarItems.add(
       BottomNavigationBarItem(
-        icon: Icon(
-          Icons.contact_mail,
-          color: Colors.black,
-        ),
         title: Text(
-          "Contact",
+          "Compte",
           style: bottomNavigationBarItemStyle,
         ),
+        icon: Material(
+            child: InkWell(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => balance()));
+                },
+                child: Icon(
+                  Icons.account_balance,
+                  color: Colors.black,
+                )),
+          )
       ),
     );
   }

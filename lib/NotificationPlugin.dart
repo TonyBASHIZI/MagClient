@@ -63,7 +63,7 @@ class NotificationPlugin {
     });
   }
 
-  Future<void> showNotification() async {
+  Future<void> showNotification() async { 
     var androidChannelSpecifics = AndroidNotificationDetails(
         "CHANNEL_ID", "CHANNEL_NAME", "CHANNEL_DESCRIPTION");
     var iosChannelSpecifics = IOSNotificationDetails();

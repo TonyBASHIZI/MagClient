@@ -110,7 +110,8 @@ class partenaire extends StatelessWidget {
                                 child: Stack(
                                   children: <Widget>[
                                     Padding(padding: EdgeInsets.all(20)),
-                                    Text(list[index]['description'],textAlign: TextAlign.center,),
+                                    Text(list[index]['description'],textAlign: TextAlign.center,
+                                    ),
                                     // Container(
                                     //   margin: EdgeInsets.all(15),
                                     //   child: FlatButton(

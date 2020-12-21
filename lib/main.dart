@@ -3,7 +3,7 @@ import 'package:MagClient/CustomAppBar.dart';
 import 'package:MagClient/CustomShapeClipper.dart';
 import 'package:MagClient/NotificationPlugin.dart';
 import 'package:MagClient/balance.dart';
-import 'package:MagClient/flight_list.dart';
+import 'package:MagClient/services.dart';
 import 'package:MagClient/partenaire.dart';
 
 void main() => runApp(MaterialApp(
@@ -170,7 +170,7 @@ class _HomeScreenTopPartState extends State<HomeScreenTopPart> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          FlightListingScreen()));
+                                          balance()));
                             },
                             child: Icon(
                               Icons.credit_card,
