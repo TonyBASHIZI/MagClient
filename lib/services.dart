@@ -49,10 +49,23 @@ class services extends StatelessWidget {
               height: 20.0,
             ),
            Container(
-             height: 210.0,
-             child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: cityCards,
+             padding: EdgeInsets.all(15),
+             margin: EdgeInsets.all(5),
+             height: 410.0,
+             child: GridView.count(
+                // scrollDirection: Axis.horizontal,
+                // children: cityCards,
+              crossAxisCount: 2,
+        children: new List<Widget>.generate(4, (index) {
+          return new GridTile(
+            child: new Card(
+              color: Colors.white,
+              child: new Center(
+                child: new Text('Service $index'),
+              )
+            ),
+          );
+        }),                 
              ),
            )
           ],
@@ -99,7 +112,7 @@ class FlightListTopPart extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            " Mangango group",
+                            " Mangango groupe",
                             style: TextStyle(
                               fontSize: 16.0,
                             ),
