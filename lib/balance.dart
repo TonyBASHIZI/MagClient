@@ -129,74 +129,144 @@ class FlightListTopPart extends StatelessWidget {
   }
 }
 
-class formExpedier extends StatelessWidget {
+class formExpedier extends StatefulWidget {
+  @override
+  _formExpedierState createState() => _formExpedierState();
+}
+
+class _formExpedierState extends State<formExpedier> {
   init() async {
     pref = await SharedPreferences.getInstance();
   }
 
+  bool isSaving = false;
+  dialog({@required String solde, @required String matricule}) => showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          // return object of type Dialog
+          return AlertDialog(
+            title: Container(
+                height: 120,
+                padding: EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                        offset: Offset(0, 0),
+                        color: Colors.black45,
+                        blurRadius: 3)
+                  ],
+                  borderRadius: BorderRadius.circular(5),
+                  color: Colors.green,
+                ),
+                child: new Text(
+                  "Matricule ${matricule.toString()} solde du compte est de \n ${solde.toString()} fc ",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.white),
+                )),
+            actions: <Widget>[
+              isSaving == false
+                  ? Container(
+                      width: 120,
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(5),
+                        boxShadow: [
+                          BoxShadow(
+                              offset: Offset(0, 0),
+                              color: Colors.black45,
+                              blurRadius: 2)
+                        ],
+                      ),
+                      child: new FlatButton(
+                        child: new Text(
+                          "Fermer",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        onPressed: () {
+                          // matController.dispose();
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    )
+                  : CircularProgressIndicator(),
+            ],
+          );
+        },
+      );
+  dialogNotification({String msg}) => showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          // return object of type Dialog
+          return AlertDialog(
+            title: Container(
+                height: 80,
+                padding: EdgeInsets.all(5),
+                child: new Text(
+                  "${msg.toString()}",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.black),
+                )),
+            actions: <Widget>[
+              isSaving == false
+                  ? Container(
+                      width: 70,
+                      child: new FlatButton(
+                        child: new Text(
+                          "Fermer",
+                          style: TextStyle(
+                            color: Colors.black,
+                          ),
+                        ),
+                        onPressed: () {
+                          // matController.dispose();
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    )
+                  : CircularProgressIndicator(),
+            ],
+          );
+        },
+      );
+
+  getBalance({@required String matricule, @required String password}) async {
+    setState(() {
+      isSaving = true;
+    });
+    await http.post(BaseUrl.getBalance, body: {
+      'cardID': matricule,
+      'password': password,
+      'transaction': 'checkbalance'
+    }).then((response) {
+      print(response.body);
+      var responseData = jsonDecode(response.body);
+      dialog(
+          solde: '${responseData[0]['montant']}',
+          matricule: '${responseData[0]['matricule']}');
+    }).catchError((error) {
+      String m =
+          "Aucun resultat trouvé veuillez entrer \n les informations correctes! ";
+      dialogNotification(msg: m);
+      print(error.toString());
+    }).whenComplete(() => {
+          setState(() {
+            isSaving = false;
+          })
+        });
+  }
+
   SharedPreferences pref;
+
   final pwdController = TextEditingController();
+
   final matController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     // pwdController.dispose();
     init();
-    bool isSaving = false;
-    dialog() => showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            // return object of type Dialog
-            return AlertDialog(
-              title: Container(
-                  height: 120,
-                  padding: EdgeInsets.all(15),
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                          offset: Offset(0, 0),
-                          color: Colors.black45,
-                          blurRadius: 3)
-                    ],
-                    borderRadius: BorderRadius.circular(5),
-                    color: Colors.green,
-                  ),
-                  child: new Text(
-                    "Matricule ${pref.getString("mat")} solde du compte est de \n 00 fc ",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.white),
-                  )),
-              actions: <Widget>[
-                isSaving == false
-                    ? Container(
-                        width: 120,
-                        decoration: BoxDecoration(
-                          color: Colors.green,
-                          borderRadius: BorderRadius.circular(5),
-                          boxShadow: [
-                            BoxShadow(
-                                offset: Offset(0, 0),
-                                color: Colors.black45,
-                                blurRadius: 2)
-                          ],
-                        ),
-                        child: new FlatButton(
-                          child: new Text(
-                            "Fermer",
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                          onPressed: () {
-                            // matController.dispose();
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                      )
-                    : CircularProgressIndicator(),
-              ],
-            );
-          },
-        );
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 24.0),
       child: Column(
@@ -283,14 +353,25 @@ class formExpedier extends StatelessWidget {
                       blurRadius: 3)
                 ],
                 color: Colors.green),
-            child: FlatButton(
-              onPressed: () {
-                pref.setString("mat", matController.text);
-                dialog();
-              },
-              child: Text("Soumettre",
-                  style: TextStyle(color: Colors.white, fontSize: 20)),
-            ),
+            child: isSaving == false
+                ? FlatButton(
+                    onPressed: () {
+                      pref.setString("mat", matController.text);
+                      print('initated');
+                      if (matController.text.isNotEmpty &&
+                          pwdController.text.isNotEmpty) {
+                        getBalance(
+                            matricule: matController.text.toString().trim(),
+                            password: pwdController.text.toString().trim());
+                      } else {
+                        String m = "Veuillez remplir tous les champs svp";
+                        dialogNotification(msg: m);
+                      }
+                    },
+                    child: Text("Soumettre",
+                        style: TextStyle(color: Colors.white, fontSize: 20)),
+                  )
+                : Center(child: CircularProgressIndicator()),
           )
         ],
       ),

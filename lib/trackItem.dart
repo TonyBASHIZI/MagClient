@@ -44,7 +44,7 @@ class _TrackItemPageState extends State<TrackItemPage> {
       ));
     });
     await http
-        .get(BaseUrl.getColi +
+        .get(BaseUrl.getBalance +
             "&idColi=" +
             widget.coli[widget.index]["code"].toString().trim())
         .then((response) {

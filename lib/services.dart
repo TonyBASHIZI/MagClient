@@ -33,7 +33,7 @@ class services extends StatelessWidget {
         centerTitle: true,
         leading: InkWell(
           child: Icon(
-            Icons.arrow_back,
+            Icons.arrow_back
           ),
           onTap: () {
             Navigator.pop(context);
@@ -46,27 +46,106 @@ class services extends StatelessWidget {
           children: <Widget>[
             FlightListTopPart(),
             SizedBox(
-              height: 20.0,
+              height: 10.0,
             ),
            Container(
-             padding: EdgeInsets.all(15),
-             margin: EdgeInsets.all(5),
+  
+             padding: const EdgeInsets.all(15),
              height: 410.0,
              child: GridView.count(
-                // scrollDirection: Axis.horizontal,
-                // children: cityCards,
-              crossAxisCount: 2,
-        children: new List<Widget>.generate(4, (index) {
-          return new GridTile(
-            child: new Card(
-              color: Colors.white,
-              child: new Center(
-                child: new Text('Service $index'),
+                primary: false,
+                padding: const EdgeInsets.all(5),
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                crossAxisCount: 2,
+                children: <Widget>[
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      boxShadow: [BoxShadow(offset: Offset(0, 0),color: Colors.black45,blurRadius: 3),],
+                      color: Colors.white,
+                  ),
+                    padding: const EdgeInsets.all(8),
+                     margin: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                    child: Column(
+                      children: <Widget>[
+                        Text("Mag Tech", style: TextStyle(
+                          fontSize: 20, color: Colors.green
+                        ),),
+                        Icon(Icons.laptop_mac,size: 80,),
+                        Text('Stations services & Carsh', textAlign: TextAlign.center,),
+                        
+
+                      ],
+
+                    ),
+                   
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      boxShadow: [BoxShadow(offset: Offset(0, 0),color: Colors.black45,blurRadius: 3),],
+                      color: Colors.white,
+                    ),
+                    padding: const EdgeInsets.all(8),
+                    margin: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                    child: Column(
+                      children: <Widget>[
+                        Text("Mag Travel", style: TextStyle(
+                          fontSize: 20, color: Colors.green
+                        ),),
+                        Icon(Icons.card_travel,size: 80,),
+                        Text('Achat & reservation billet de voyage', textAlign: TextAlign.center,)
+
+                      ],
+
+                    ),
+                    
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      boxShadow: [BoxShadow(offset: Offset(0, 0),color: Colors.black45,blurRadius: 3),],
+                      color: Colors.white,
+                    ),
+                    padding: const EdgeInsets.all(8),
+                     margin: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                    child: Column(
+                      children: <Widget>[
+                        Text("Mag Courrier", style: TextStyle(
+                          fontSize: 20, color: Colors.green
+                        ),),
+                        Icon(Icons.mail,size: 80,),
+                          Text('Recever & envoyer des courriers', textAlign: TextAlign.center,)
+
+                      ],
+
+                    ),                   
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      boxShadow: [BoxShadow(offset: Offset(0, 0),color: Colors.black45,blurRadius: 3),],
+                      color: Colors.white,
+                    ),
+                    padding: const EdgeInsets.all(8),
+                     margin: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                    child: Column(
+                      children: <Widget>[
+                        Text("Mag Security", style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.green
+                        ),),
+                        Icon(Icons.security,size: 80,),
+                          Text('Securité numerique & physique', textAlign: TextAlign.center,)
+
+                      ],
+
+                    ),
+                  ),
+                
+                ],
               )
-            ),
-          );
-        }),                 
-             ),
            )
           ],
         ),
@@ -133,7 +212,7 @@ class FlightListTopPart extends StatelessWidget {
                     Expanded(
                         flex: 1,
                         child: Icon(
-                          Icons.import_export,
+                          Icons.local_laundry_service,
                           color: Colors.black,
                           size: 24.0,
                         )),
@@ -148,130 +227,3 @@ class FlightListTopPart extends StatelessWidget {
   }
 }
 
-List<CityCard> cityCards = [
-  CityCard("assets/images/cobil.jpeg", "RDC Congo", "Katindo", "Goma",
-      "Station de service", "80.0"),
-  CityCard("assets/images/takenga.jpeg", "RDC Congo", "Centre", "Butembo",
-      "Station de service", "10"),
-  CityCard("assets/images/carwash.jpg", "RDC Congo", "Goma", "BDGL",
-      "Station de service", "80"),
-];
-class CityCard extends StatelessWidget {
-  final String imagePath, cityname, monthYear, discount, oldprice, newprice;
-
-  CityCard(this.imagePath, this.monthYear, this.discount, this.oldprice,
-      this.newprice, this.cityname);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: Column(
-        children: <Widget>[
-          ClipRRect(
-            borderRadius: BorderRadius.all(
-              Radius.circular(20.0),
-            ),
-            child: InkWell(
-              // onTap: () {
-              //   Navigator.push(context,
-              //       MaterialPageRoute(builder: (context) => partenaire()));
-              // },
-              child: Stack(
-                children: <Widget>[
-                  Container(
-                    height: 150.0,
-                    width: 160.0,
-                    child: Image.asset(
-                      imagePath,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  Positioned(
-                    left: 0.0,
-                    bottom: 0.0,
-                    width: 160.0,
-                    height: 60.0,
-                    child: Container(
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                              begin: Alignment.bottomCenter,
-                              end: Alignment.topCenter,
-                              colors: [
-                            Colors.black,
-                            Colors.black.withOpacity(0.1),
-                          ])),
-                    ),
-                  ),
-                  Positioned(
-                    left: 10.0,
-                    bottom: 10.0,
-                    right: 5.0,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(oldprice,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                    fontSize: 18.0)),
-                            Text(monthYear,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.white,
-                                    fontSize: 14.0)),
-                          ],
-                        ),
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 6.0, vertical: 2.0),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              shape: BoxShape.rectangle,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10.0),
-                              )),
-                          child: Text(
-                            "$discount%",
-                            style:
-                                TextStyle(fontSize: 10.0, color: Colors.black),
-                          ),
-                        ),
-                        // InkWell(
-                        //    onTap: (){
-                        //                 Navigator.push(context, MaterialPageRoute(builder: (context) => relaisList()));
-                        //            },
-                        // ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              SizedBox(
-                width: 5.0,
-              ),
-              Text(newprice,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                  )),
-              SizedBox(
-                width: 5.0,
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}

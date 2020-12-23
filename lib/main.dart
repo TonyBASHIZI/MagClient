@@ -5,9 +5,10 @@ import 'package:MagClient/NotificationPlugin.dart';
 import 'package:MagClient/balance.dart';
 import 'package:MagClient/services.dart';
 import 'package:MagClient/partenaire.dart';
+import 'package:MagClient/contact.dart';
 
 void main() => runApp(MaterialApp(
-      title: 'Tracking bagages',
+      title: 'Mag client',
       debugShowCheckedModeBanner: false,
       home: HomeScreen(),
       theme: appTheme,
@@ -22,7 +23,7 @@ ThemeData appTheme = ThemeData(
   primaryColor: Color(0xFFF3791A),
 );
 
-List<String> locations = ['DRC', 'MAGTECH'];
+List<String> locations = ['DRC', 'ABOUT US'];
 const TextStyle dropDownLabelStyle =
     TextStyle(color: Colors.black, fontSize: 16.0);
 const TextStyle dropDownMenuItemStyle =
@@ -122,9 +123,17 @@ class _HomeScreenTopPartState extends State<HomeScreenTopPart> {
                         ],
                       ),
                       Spacer(),
-                      Icon(
-                        Icons.settings,
-                        color: Colors.black,
+                      Container(
+                        child: new IconButton(
+                          icon: new Icon(Icons.contacts),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Contacts()));
+                          },
+                          color: Colors.black,
+                        ),
                       ),
                     ],
                   ),
@@ -169,8 +178,7 @@ class _HomeScreenTopPartState extends State<HomeScreenTopPart> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          balance()));
+                                      builder: (context) => balance()));
                             },
                             child: Icon(
                               Icons.credit_card,
@@ -192,10 +200,8 @@ class _HomeScreenTopPartState extends State<HomeScreenTopPart> {
                   children: <Widget>[
                     InkWell(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => balance()));
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => balance()));
                       },
                       child: ChoiceChip(Icons.account_balance, "Balance"),
                     ),
