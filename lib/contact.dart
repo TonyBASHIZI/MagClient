@@ -27,7 +27,7 @@ class Contacts extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.green,
         title: Text(
-          "Mag contact",
+          "Mag contact ",
         ),
         elevation: 0.0,
         centerTitle: true,
@@ -51,7 +51,9 @@ class Contacts extends StatelessWidget {
            Container(
               child: Column(
                 children: <Widget>[
-                  Text("Magango groupe contact"),
+                  Text("Magango groupe contact \n \n Email: mangango.groupe@gmail.com \n Adresse : Enclos ENRA BENI VILLE/Nord-kivu/"),
+                  Image.asset("assets/station.jpeg")
+
                 ],
               ),
             
