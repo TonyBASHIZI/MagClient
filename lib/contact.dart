@@ -52,8 +52,8 @@ class Contacts extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Text("Magango groupe contact \n \n Email: mangango.groupe@gmail.com \n Adresse : Enclos ENRA BENI VILLE/Nord-kivu/"),
-                  Image.asset("assets/station.jpeg")
-
+                  Image.asset("assets/takenga.jpeg"),
+              
                 ],
               ),
             

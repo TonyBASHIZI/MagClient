@@ -23,7 +23,7 @@ ThemeData appTheme = ThemeData(
   primaryColor: Color(0xFFF3791A),
 );
 
-List<String> locations = ['DRC', 'ABOUT US'];
+List<String> locations = ['DRC', 'Apropos de nous'];
 const TextStyle dropDownLabelStyle =
     TextStyle(color: Colors.black, fontSize: 16.0);
 const TextStyle dropDownMenuItemStyle =
@@ -142,7 +142,7 @@ class _HomeScreenTopPartState extends State<HomeScreenTopPart> {
                   height: 50.0,
                 ),
                 Text(
-                  'MagTech\n Soft ',
+                  'Mag SARL\n App ',
                   style: TextStyle(
                     fontSize: 24.0,
                     color: Colors.white,
@@ -267,7 +267,7 @@ var homeScreenBottomPart = Column(
             width: 10.0,
           ),
           Text(
-            "Partenaires MagTech",
+            "Partenaires Mag",
             style: dropDownMenuItemStyle,
           ),
           Spacer(),
@@ -294,7 +294,7 @@ List<CityCard> cityCards = [
   CityCard("assets/images/takenga.jpeg", "RDC Congo", "Centre", "Butembo",
       "Station de service", "10"),
   CityCard("assets/images/carwash.jpg", "RDC Congo", "Goma", "BDGL",
-      "Station de service", "80"),
+      "Carwash de service", "80"),
 ];
 
 // final formatCurrency = NumberFormat.s.
