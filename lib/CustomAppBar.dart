@@ -30,6 +30,10 @@ class CustomAppBar extends StatelessWidget {
     );
     bottomBarItems.add(
       BottomNavigationBarItem(
+         title: Text(
+          "Services",
+          style: bottomNavigationBarItemStyle,
+        ),
          icon: Material(
             child: InkWell(
                 onTap: () {
@@ -41,10 +45,7 @@ class CustomAppBar extends StatelessWidget {
                   color: Colors.black,
                 )),
           ),
-        title: Text(
-          "Services",
-          style: bottomNavigationBarItemStyle,
-        ),
+       
       ),
     );
     bottomBarItems.add(

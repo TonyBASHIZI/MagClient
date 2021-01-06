@@ -44,15 +44,18 @@ class Contacts extends StatelessWidget {
         scrollDirection: Axis.vertical,
         child: Column(
           children: <Widget>[
+            
             FlightListTopPart(),
             SizedBox(
               height: 10.0,
             ),
            Container(
+             margin: EdgeInsets.all(15),
               child: Column(
                 children: <Widget>[
-                  Text("Magango groupe contact \n \n Email: mangango.groupe@gmail.com \n Adresse : Enclos ENRA BENI VILLE/Nord-kivu/"),
-                  Image.asset("assets/takenga.jpeg"),
+                  Text("Magango groupe \n \n Adresse : commune mulekera, boulevard nyamwisi \n Réf : enclos ENRAVille de Benin\n République démocratique du Congo \n "),
+                  Text("RCCM N°CD/Bbo/ RCCM/20-B-091: CD/RCCM: 20-B-091- ID. NAT: 5-630-N57515F-N° "),
+                  Image.asset("assets/images/mag.PNG"),
               
                 ],
               ),
