@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:MagClient/track.dart';
 import 'package:MagClient/utils/config.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -21,6 +22,8 @@ class services extends StatelessWidget {
     return jsonDecode(response.body);
   }
 
+  List data = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,9 +35,7 @@ class services extends StatelessWidget {
         elevation: 0.0,
         centerTitle: true,
         leading: InkWell(
-          child: Icon(
-            Icons.arrow_back
-          ),
+          child: Icon(Icons.arrow_back),
           onTap: () {
             Navigator.pop(context);
           },
@@ -48,105 +49,145 @@ class services extends StatelessWidget {
             SizedBox(
               height: 10.0,
             ),
-           Container(
-  
-             padding: const EdgeInsets.all(15),
-             height: 410.0,
-             child: GridView.count(
-                primary: false,
-                padding: const EdgeInsets.all(5),
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                crossAxisCount: 2,
-                children: <Widget>[
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      boxShadow: [BoxShadow(offset: Offset(0, 0),color: Colors.black45,blurRadius: 3),],
-                      color: Colors.white,
-                  ),
-                    padding: const EdgeInsets.all(8),
-                     margin: EdgeInsets.fromLTRB(0, 0, 0, 5),
-                    child: Column(
-                      children: <Widget>[
-                        Text("Mag Tech", style: TextStyle(
-                          fontSize: 20, color: Colors.green
-                        ),),
-                        Icon(Icons.laptop_mac,size: 80,),
-                        Text('Stations services & Carsh', textAlign: TextAlign.center,),
-                        
-
-                      ],
-
+            Container(
+                padding: const EdgeInsets.all(15),
+                height: 410.0,
+                child: GridView.count(
+                  primary: false,
+                  padding: const EdgeInsets.all(5),
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                  crossAxisCount: 2,
+                  children: <Widget>[
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        boxShadow: [
+                          BoxShadow(
+                              offset: Offset(0, 0),
+                              color: Colors.black45,
+                              blurRadius: 3),
+                        ],
+                        color: Colors.white,
+                      ),
+                      padding: const EdgeInsets.all(8),
+                      margin: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            "Mag Tech",
+                            style: TextStyle(fontSize: 20, color: Colors.green),
+                          ),
+                          Icon(
+                            Icons.laptop_mac,
+                            size: 80,
+                          ),
+                          Text(
+                            'Stations services & Carsh',
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
                     ),
-                   
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      boxShadow: [BoxShadow(offset: Offset(0, 0),color: Colors.black45,blurRadius: 3),],
-                      color: Colors.white,
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        boxShadow: [
+                          BoxShadow(
+                              offset: Offset(0, 0),
+                              color: Colors.black45,
+                              blurRadius: 3),
+                        ],
+                        color: Colors.white,
+                      ),
+                      padding: const EdgeInsets.all(8),
+                      margin: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            "Mag Travel",
+                            style: TextStyle(fontSize: 20, color: Colors.green),
+                          ),
+                          Icon(
+                            Icons.card_travel,
+                            size: 80,
+                          ),
+                          Text(
+                            'Achat & reservation billet de voyage',
+                            textAlign: TextAlign.center,
+                          )
+                        ],
+                      ),
                     ),
-                    padding: const EdgeInsets.all(8),
-                    margin: EdgeInsets.fromLTRB(0, 0, 0, 5),
-                    child: Column(
-                      children: <Widget>[
-                        Text("Mag Travel", style: TextStyle(
-                          fontSize: 20, color: Colors.green
-                        ),),
-                        Icon(Icons.card_travel,size: 80,),
-                        Text('Achat & reservation billet de voyage', textAlign: TextAlign.center,)
-
-                      ],
-
+                    GestureDetector(
+                      onTap: () async {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Track()));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          boxShadow: [
+                            BoxShadow(
+                                offset: Offset(0, 0),
+                                color: Colors.black45,
+                                blurRadius: 3),
+                          ],
+                          color: Colors.white,
+                        ),
+                        padding: const EdgeInsets.all(8),
+                        margin: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                        child: Column(
+                          children: <Widget>[
+                            Text(
+                              "Mag Courrier",
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.green),
+                            ),
+                            Icon(
+                              Icons.mail,
+                              size: 80,
+                            ),
+                            Text(
+                              'Recever & envoyer des courriers',
+                              textAlign: TextAlign.center,
+                            )
+                          ],
+                        ),
+                      ),
                     ),
-                    
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      boxShadow: [BoxShadow(offset: Offset(0, 0),color: Colors.black45,blurRadius: 3),],
-                      color: Colors.white,
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        boxShadow: [
+                          BoxShadow(
+                              offset: Offset(0, 0),
+                              color: Colors.black45,
+                              blurRadius: 3),
+                        ],
+                        color: Colors.white,
+                      ),
+                      padding: const EdgeInsets.all(8),
+                      margin: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            "Mag Security",
+                            style: TextStyle(fontSize: 20, color: Colors.green),
+                          ),
+                          Icon(
+                            Icons.security,
+                            size: 80,
+                          ),
+                          Text(
+                            'Securité numerique & physique',
+                            textAlign: TextAlign.center,
+                          )
+                        ],
+                      ),
                     ),
-                    padding: const EdgeInsets.all(8),
-                     margin: EdgeInsets.fromLTRB(0, 0, 0, 5),
-                    child: Column(
-                      children: <Widget>[
-                        Text("Mag Courrier", style: TextStyle(
-                          fontSize: 20, color: Colors.green
-                        ),),
-                        Icon(Icons.mail,size: 80,),
-                          Text('Recever & envoyer des courriers', textAlign: TextAlign.center,)
-
-                      ],
-
-                    ),                   
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      boxShadow: [BoxShadow(offset: Offset(0, 0),color: Colors.black45,blurRadius: 3),],
-                      color: Colors.white,
-                    ),
-                    padding: const EdgeInsets.all(8),
-                     margin: EdgeInsets.fromLTRB(0, 0, 0, 5),
-                    child: Column(
-                      children: <Widget>[
-                        Text("Mag Security", style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.green
-                        ),),
-                        Icon(Icons.security,size: 80,),
-                          Text('Securité numerique & physique', textAlign: TextAlign.center,)
-
-                      ],
-
-                    ),
-                  ),
-                
-                ],
-              )
-           )
+                  ],
+                ))
           ],
         ),
       ),
@@ -226,4 +267,3 @@ class FlightListTopPart extends StatelessWidget {
     );
   }
 }
-
