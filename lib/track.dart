@@ -30,6 +30,7 @@ class _TrackState extends State<Track> {
   List data = [];
   @override
   Widget build(BuildContext context) {
+     
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
@@ -52,9 +53,9 @@ class _TrackState extends State<Track> {
             GestureDetector(
                 onTap: () async {
                   final response = await http.post(BaseUrl.url + 'get_data.php',
-                      body: {'transaction': 'getcolis', 'cardID': '12345'});
-                  print(response.body);
-                  List res=jsonDecode(response.body);
+                      body: {'transaction': 'getcolis', 'cardID': '+243973697114'});
+                  // print(response.body);
+                  List res = jsonDecode(response.body);
                   setState(() {
                     if (res.isNotEmpty) {
                       data = jsonDecode(response.body);
@@ -69,16 +70,45 @@ class _TrackState extends State<Track> {
                 shrinkWrap: true,
                 itemCount: data.length > 0 ? data.length : 1,
                 itemBuilder: (context, int index) {
-                  return data.length>0? Container(
-                    width: double.maxFinite,
-                    height: 200,
-                    color: Colors.green,
-                    child: Text(data[index]['designation']),
-                  ):Container(
-                    width: double.maxFinite,
-                    height: 200,
-                    color: Colors.red,
-                  );
+                  return data.length > 0
+                      ? Container(
+                         decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(5),
+                        boxShadow: [
+                          BoxShadow(
+                              offset: Offset(0, 0),
+                              color: Colors.black,
+                              blurRadius: 4)
+                        ],
+                      ),
+                          width: double.maxFinite,
+                          height: 150,
+                          // color: Colors.white,
+                          margin: EdgeInsets.all(10),
+                          padding: EdgeInsets.all(10),
+                          child: Text(
+                            "CODE COLI : ${data[index]['id']}\n DESCRIPTION : ${data[index]['designation']} \n EXP : ${data[index]['exp']} \n DEST : ${data[index]['dest']} \n Tel DEST : ${data[index]['tel']} \n VILLE SORTIE : ${data[index]['sortie']} \n VILLE ARRIVEE : ${data[index]['entree']}",
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        )
+                      : Container(
+                          width: double.maxFinite,
+                          height: 200,
+                          color: Colors.white54,
+                          margin: EdgeInsets.all(10),
+                          padding: EdgeInsets.all(5),
+                          child: Text(
+                            "Veuillez saisir CODE du coli ou Numero de telephone sur le champs au dessus pour avoir les informations sur le coli!",
+                            style: TextStyle(
+                              fontSize: 15,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        );
                 })
           ],
         ),
@@ -87,9 +117,17 @@ class _TrackState extends State<Track> {
   }
 }
 
-class FlightListTopPart extends StatelessWidget {
+class FlightListTopPart extends StatefulWidget {
+  @override
+  _FlightListTopPartState createState() => _FlightListTopPartState();
+}
+
+class _FlightListTopPartState extends State<FlightListTopPart> {
+  final textController = TextEditingController();
+  bool isSaving = false;
   @override
   Widget build(BuildContext context) {
+     List data = [];
     return Stack(
       children: <Widget>[
         ClipPath(
@@ -124,31 +162,58 @@ class FlightListTopPart extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            " Mangango groupe",
+                            "Code coli ou Numero de telephone",
                             style: TextStyle(
-                              fontSize: 16.0,
+                              fontSize: 14.0,
                             ),
                           ),
                           Divider(
                             color: Colors.grey,
                             height: 20.0,
                           ),
-                          Text(
-                            "vous offre plusieurs services",
-                            style: TextStyle(
-                                fontSize: 16.0, fontWeight: FontWeight.bold),
-                          ),
+                          TextField(
+              controller: textController,
+              style: dropDownMenuItemStyle,
+              obscureText: false,
+              textAlign: TextAlign.center,
+
+              decoration: InputDecoration(
+                icon: Icon(Icons.text_fields),
+                labelText: "Tapez ici le code",
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),
+                suffixIcon: Material(
+                  elevation: 2.0,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(30.0),
+                    
+                  ),
+                  child: InkWell(
+                  
+                          onTap: () async {
+                      final response = await http.post(BaseUrl.url + 'get_data.php',
+                      body: {'transaction': 'getcolis', 'cardID': '+243973697114'});
+                  // print(response.body);
+                  List res = jsonDecode(response.body);
+                  setState(() {
+                    if (res.isNotEmpty) {
+                      data = jsonDecode(response.body);
+                    }
+                  });
+                    },
+                          child: Icon(
+                        Icons.check_box_outline_blank,
+                        color: Colors.black,
+                      ),    
+                  ),
+                ),
+                // border: InputBorder.none,
+              ),
+            ),
                         ],
                       ),
                     ),
-                    Spacer(),
-                    Expanded(
-                        flex: 1,
-                        child: Icon(
-                          Icons.local_laundry_service,
-                          color: Colors.black,
-                          size: 24.0,
-                        )),
+                  
                   ],
                 ),
               ),
