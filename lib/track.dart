@@ -35,7 +35,7 @@ class _TrackState extends State<Track> {
       appBar: AppBar(
         backgroundColor: Colors.green,
         title: Text(
-          "Mag services",
+          "Mag courrier tracking",
         ),
         elevation: 0.0,
         centerTitle: true,
@@ -161,11 +161,24 @@ class _FlightListTopPartState extends State<FlightListTopPart> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(
-                            "Code coli ou Numero de telephone",
-                            style: TextStyle(
-                              fontSize: 14.0,
+                          
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.red,
+                        borderRadius: BorderRadius.circular(5),
+                        boxShadow: [
+                          BoxShadow(
+                              offset: Offset(0, 0),
+                              color: Colors.black,
+                              blurRadius: 3)
+                        ],
                             ),
+                            child: isSaving == false
+                ? FlatButton(onPressed: null, 
+                            child: Text("Soumettre",
+                        style: TextStyle(color: Colors.black, fontSize: 15)),
+                            
+                            ): Center(child: CircularProgressIndicator()),
                           ),
                           Divider(
                             color: Colors.grey,
@@ -192,7 +205,7 @@ class _FlightListTopPartState extends State<FlightListTopPart> {
                   
                           onTap: () async {
                       final response = await http.post(BaseUrl.url + 'get_data.php',
-                      body: {'transaction': 'getcolis', 'cardID': '+243973697114'});
+                      body: {'transaction': 'getcolis', 'cardID': '${textController.toString().trim()}'});
                   // print(response.body);
                   List res = jsonDecode(response.body);
                   setState(() {
